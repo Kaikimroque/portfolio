@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaiki Martins | Portfólio</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+/* ===================================================
+   ESTILO BASE: TEMA CLARO (DEFAULT)
+   =================================================== */
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f1f5f9;
+    color:#0f172a;
+    position:relative;
+    overflow-x:hidden;
+    transition:background-color 0.4s ease, color 0.4s ease;
+}
+
+.bg-animation{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    z-index:-1;
+    overflow:hidden;
+    pointer-events:none;
+    background:#f1f5f9;
+    transition:background 0.4s ease;
+}
+
+.bg-grid{
+    position:absolute;
+    inset:0;
+    background-image:
+        linear-gradient(rgba(0, 102, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 102, 255, 0.06) 1px, transparent 1px);
+    background-size:50px 50px;
+    opacity:0.6;
+}
+
+.bg-glow{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(110px);
+    opacity:0.25;
+    animation:floatGlow 18s ease-in-out infinite alternate;
+}
+
+.glow-1{ width:550px; height:550px; background:#00f0ff; top:-100px; left:-100px; }
+.glow-2{ width:650px; height:650px; background:#0055ff; bottom:-150px; right:-100px; animation-delay:-6s; animation-duration:22s; }
+.glow-3{ width:500px; height:500px; background:#38bdf8; top:40%; left:50%; animation-delay:-12s; animation-duration:20s; }
+
+@keyframes floatGlow{
+    0%{ transform:translate(0, 0) scale(1); }
+    50%{ transform:translate(80px, 60px) scale(1.15); }
+    100%{ transform:translate(-60px, -40px) scale(0.9); }
+}
+
+#mouse-glow{
+    position:fixed;
+    top:0;
+    left:0;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(0, 102, 255, 0.15) 0%, rgba(0, 240, 255, 0.05) 40%, transparent 70%);
+    pointer-events:none;
+    transform:translate(-50%, -50%);
+    z-index:0;
+    opacity:0;
+    filter:blur(30px);
+    transition:opacity 0.5s ease;
+}
+
+#mouse-glow.active{ opacity:0.75; }
+
+/* NAVEGAÇÃO */
+.nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:76px;
+    background:rgba(241, 245, 249, 0.88);
+    backdrop-filter:blur(12px);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    z-index:100;
+    border-bottom:1px solid rgba(0, 102, 255, 0.15);
+    transition:background 0.4s ease, border-color 0.4s ease;
+}
+
+.logo{
+    color:#0055ff;
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:-2px;
+    display:inline-block;
+    background:linear-gradient(90deg, #0055ff, #00f0ff, #0055ff);
+    background-size:200% auto;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:logoGlow 4s linear infinite;
+}
+
+@keyframes logoGlow {
+    to { background-position:200% center; }
+}
+
+.menu-wrapper{ display:flex; align-items:center; gap:20px; }
+.menu{ display:flex; align-items:center; gap:28px; list-style:none; }
+.menu a{ text-decoration:none; color:#0f172a; font-size:13px; font-weight:bold; transition:opacity .2s, color 0.4s ease; }
+.menu a:hover{opacity:.7}
+
+.menu-btn{
+    background:#0055ff!important;
+    color:#ffffff!important;
+    padding:11px 18px;
+    border-radius:25px;
+    box-shadow:0 0 15px rgba(0, 85, 255, 0.25);
+}
+
+/* INTERRUPTOR DE TEMA */
+.theme-switch-wrapper {
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(0,0,0,0.05);
+    padding:6px 12px;
+    border-radius:30px;
+    border:1px solid rgba(0,0,0,0.1);
+}
+
+.theme-icon { font-size:13px; user-select:none; }
+.theme-switch { display:inline-block; height:20px; position:relative; width:38px; }
+.theme-switch input { display:none; }
+
+.slider {
+    background-color:#cbd5e1;
+    bottom:0;
+    cursor:pointer;
+    left:0;
+    position:absolute;
+    right:0;
+    top:0;
+    transition:.3s;
+    border:1px solid #0055ff;
+    border-radius:34px;
+}
+
+.slider:before {
+    background-color:#0055ff;
+    bottom:2px;
+    content:"";
+    height:14px;
+    left:2px;
+    position:absolute;
+    transition:.3s;
+    width:14px;
+    border-radius:50%;
+    box-shadow:0 0 6px #0055ff;
+}
+
+input:checked + .slider {
+    background-color:#1b2a4a;
+    border-color:rgba(0, 240, 255, 0.4);
+}
+
+input:checked + .slider:before {
+    transform:translateX(18px);
+    background-color:#00f0ff;
+    box-shadow:0 0 6px #00f0ff;
+}
+
+/* ONDAS */
+.wave-divider{ width:100%; overflow:hidden; line-height:0; position:relative; z-index:2; }
+.wave-divider svg{ position:relative; display:block; width:calc(100% + 1.3px); height:70px; }
+.wave-electric path{ fill:#00f0ff; }
+.wave-slate path{ fill:rgba(255, 255, 255, 0.75); transition:fill 0.4s ease; }
+
+/* CONTEÚDO */
+.page{ min-height:90vh; padding:100px 7% 60px; display:flex; align-items:center; position:relative; }
+.container{ width:min(1100px,100%); margin:auto; }
+
+.home{ background:transparent; }
+.home-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:70px; align-items:center; }
+
+.small{ text-transform:uppercase; letter-spacing:3px; font-size:11px; font-weight:bold; color:#0055ff; margin-bottom:20px; transition:color 0.4s ease; }
+
+/* INTERAÇÃO NO NOME */
+#hero-name {
+    font-size:clamp(52px,8vw,100px);
+    line-height:.86;
+    letter-spacing:-6px;
+    max-width:700px;
+    color:#0f172a;
+    transition:color 0.4s ease, transform 0.2s ease, text-shadow 0.2s ease;
+    cursor:pointer;
+    user-select:none;
+    display:inline-block;
+}
+
+#hero-name:hover {
+    transform:scale(1.02);
+    background:linear-gradient(90deg, #0055ff, #00f0ff, #0055ff);
+    background-size:200% auto;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:logoGlow 2s linear infinite;
+}
+
+#hero-name.clicked {
+    animation:pulseName 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes pulseName {
+    0% { transform:scale(1); }
+    50% { transform:scale(1.08) rotate(1.5deg); }
+    100% { transform:scale(1); }
+}
+
+/* PARTICULAS DO CLIQUE DO NOME */
+.sparkle-particle {
+    position:fixed;
+    pointer-events:none;
+    z-index:9999;
+    font-size:22px;
+    user-select:none;
+    animation:floatAndFade 0.8s forwards cubic-bezier(0.1, 0.8, 0.3, 1);
+}
+
+@keyframes floatAndFade {
+    0% {
+        opacity:1;
+        transform:translate(-50%, -50%) scale(0.6) rotate(0deg);
+    }
+    100% {
+        opacity:0;
+        transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.4) rotate(var(--rot));
+    }
+}
+
+.home p{ max-width:530px; color:#334155; font-size:18px; margin-top:28px; transition:color 0.4s ease; }
+
+.buttons{ display:flex; gap:12px; flex-wrap:wrap; margin-top:30px; }
+.button{ display:inline-block; padding:14px 21px; border-radius:30px; text-decoration:none; font-size:13px; font-weight:bold; border:1px solid #0055ff; cursor:pointer; transition:transform .2s ease, background-color .2s ease, color .2s ease, box-shadow .2s ease; }
+
+.dark{ background:#0055ff; color:#ffffff; box-shadow:0 0 15px rgba(0, 85, 255, 0.25); }
+.light{ background:transparent; color:#0f172a; }
+.button:hover{ transform:translateY(-2px); box-shadow:0 0 20px rgba(0, 85, 255, 0.3); }
+
+/* AVATAR */
+.avatar-wrap{ width:min(490px,90vw); aspect-ratio:1; margin:auto; position:relative; display:flex; align-items:center; justify-content:center; }
+.avatar-wrap::before, .avatar-wrap::after{ content:""; position:absolute; border:1px solid rgba(0, 85, 255, 0.2); border-radius:50%; inset:7%; animation:spin 22s linear infinite; pointer-events:none; transition:border-color 0.4s ease; }
+.avatar-wrap::after{ inset:15%; border-color:rgba(0, 85, 255, 0.3); animation-direction:reverse; animation-duration:16s; }
+
+.orbit{ position:absolute; z-index:4; padding:9px 13px; border:1px solid #cbd5e1; background:rgba(255, 255, 255, 0.92); box-shadow:0 10px 25px rgba(0,0,0,.08); border-radius:999px; color:#0f172a; font-size:10px; font-weight:900; letter-spacing:1px; white-space:nowrap; backdrop-filter:blur(7px); pointer-events:none; transition:background 0.4s ease, border-color 0.4s ease, color 0.4s ease; }
+.orbit-a{top:8%;left:2%;border-color:rgba(0,85,255,.6);color:#0055ff}
+.orbit-b{top:19%;right:0;border-color:rgba(56,189,248,.6);color:#0284c7}
+.orbit-c{bottom:14%;right:2%;border-color:rgba(0,102,255,.8);color:#2563eb}
+.orbit-d{bottom:4%;left:8%;border-color:#cbd5e1;color:#475569}
+
+.avatar{ width:min(330px,65vw); aspect-ratio:1; margin:auto; border-radius:50%; background:#ffffff; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden; z-index:3; box-shadow:0 0 0 10px rgba(226, 232, 240, 0.9), 0 0 45px rgba(0, 85, 255, 0.2); border:1px solid rgba(0, 85, 255, 0.3); cursor:pointer; user-select:none; transition:transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease; }
+.avatar:hover{ transform:scale(1.12); box-shadow:0 0 0 12px rgba(0,85,255,0.2), 0 0 65px rgba(0,85,255,0.3); border-color:rgba(0,85,255,0.6); }
+.avatar.is-zoomed{ transform:scale(1.3) !important; box-shadow:0 0 0 16px rgba(0,85,255,0.3), 0 0 90px rgba(0,85,255,0.5) !important; border-color:#0055ff !important; z-index:20; }
+
+.avatar span{ font-size:105px; font-weight:900; letter-spacing:-6px; display:inline-block; background:linear-gradient(135deg, #00f0ff 0%, #0055ff 100%); background-size:200% 200%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:kbGradient 4s ease infinite alternate, kbFloat 3.5s ease-in-out infinite alternate; pointer-events:none; }
+.avatar small{ position:absolute; bottom:35px; color:#475569; letter-spacing:3px; font-size:10px; font-weight:bold; pointer-events:none; transition:color 0.4s ease; }
+
+@keyframes kbGradient{ 0%{background-position:0% 50%} 100%{background-position:100% 50%} }
+@keyframes kbFloat{ 0%{ transform:translateY(0) scale(1); } 50%{ transform:translateY(-8px) scale(1.06); } 100%{ transform:translateY(0) scale(1); } }
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* SOBRE MIM */
+.about{ background:rgba(255, 255, 255, 0.75); backdrop-filter:blur(10px); transition:background 0.4s ease; }
+.about-grid{ display:grid; grid-template-columns:.7fr 1.3fr; gap:80px; }
+h2{ font-size:clamp(42px,6vw,72px); line-height:.9; letter-spacing:-4px; color:#0f172a; transition:color 0.4s ease; }
+.text p{ font-size:18px; color:#334155; margin-bottom:22px; max-width:700px; line-height:1.6; transition:color 0.4s ease; }
+
+.tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:30px; }
+.tag{ border:1px solid #cbd5e1; padding:8px 13px; border-radius:20px; font-size:11px; font-weight:bold; color:#0f172a; background:#ffffff; transition:background 0.4s ease, border-color 0.4s ease, color 0.4s ease; }
+
+/* ENTREGAS */
+.deliveries{ background:transparent; }
+.section-top{ display:flex; justify-content:space-between; gap:30px; align-items:flex-end; margin-bottom:45px; }
+.section-top p{ max-width:380px; color:#334155; line-height:1.5; transition:color 0.4s ease; }
+
+.cards-zigzag{ position:relative; display:flex; flex-direction:column; gap:35px; padding:10px 0; max-width:1000px; margin:0 auto; }
+.cards-zigzag::before{ content:""; position:absolute; top:10px; bottom:10px; left:50%; width:3px; background:linear-gradient(180deg, #00f0ff 0%, #0055ff 50%, #38bdf8 100%); transform:translateX(-50%); border-radius:3px; opacity:.6; }
+
+.card{ position:relative; width:calc(50% - 35px); border-radius:24px; background:rgba(255, 255, 255, 0.9); backdrop-filter:blur(8px); padding:28px; border:1px solid #e2e8f0; box-shadow:0 10px 25px rgba(0,0,0,.05); transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease, background 0.4s ease; }
+.card-left{ align-self:flex-start; border-left:4px solid #00f0ff; }
+.card-right{ align-self:flex-end; border-right:4px solid #0055ff; }
+
+.card::before{ content:""; position:absolute; top:32px; width:14px; height:14px; border-radius:50%; background:#0055ff; border:3px solid #f1f5f9; box-shadow:0 0 10px rgba(0,85,255,.4); z-index:10; }
+.card-left::before{ right:-44px; }
+.card-right::before{ left:-44px; }
+
+.card-icon{ position:absolute; top:22px; right:24px; font-size:22px; font-weight:900; color:rgba(0, 85, 255, 0.2); pointer-events:none; }
+.card:hover{ transform:translateY(-6px); box-shadow:0 18px 35px rgba(0, 85, 255, 0.12), 0 0 20px rgba(0, 85, 255, 0.15); }
+
+.number{ display:inline-flex; padding:5px 12px; border:1px solid #cbd5e1; border-radius:999px; color:#0055ff; background:#e2e8f0; font-size:11px; font-weight:bold; letter-spacing:1px; transition:background 0.4s ease, color 0.4s ease, border-color 0.4s ease; }
+.card h3{ font-size:25px; line-height:1.15; margin:18px 0 6px; color:#0f172a; transition:color 0.4s ease; }
+.date{ font-size:12px; color:#64748b; margin-bottom:12px; transition:color 0.4s ease; }
+.card p{ color:#334155; line-height:1.6; font-size:14px; transition:color 0.4s ease; }
+.card a{ display:inline-flex; align-items:center; margin-top:22px; padding:10px 18px; color:#ffffff!important; background:#0055ff; border-radius:999px; font-size:12px; font-weight:900; text-decoration:none; box-shadow:0 0 12px rgba(0, 85, 255, 0.3); transition:transform .2s ease, filter .2s ease, background 0.4s ease; }
+.card a:hover{ transform:translateX(5px); filter:brightness(1.1); }
+
+/* OBJETIVO */
+.future{ background:linear-gradient(135deg, #00f0ff 0%, #0066ff 100%); color:#080d1a; padding-top:70px; padding-bottom:70px; }
+.future .small{ color:#080d1a; opacity:.85; }
+.future h2{ color:#080d1a; }
+.future p{ color:#080d1a; max-width:650px; font-size:18px; margin-top:25px; font-weight:600; line-height:1.6; }
+.future .button.light{ color:#080d1a!important; border-color:#080d1a!important; background:transparent; }
+.future .button.dark{ background:#080d1a!important; color:#00f0ff!important; border-color:#080d1a!important; box-shadow:none; }
+.future .page-controls{ border-color:rgba(8,13,26,0.25); }
+.future .next, .future .prev{ color:#080d1a; font-weight:bold; }
+
+/* CONTATO */
+.contact{ background:rgba(255, 255, 255, 0.75); backdrop-filter:blur(6px); min-height:60vh; transition:background 0.4s ease; }
+.contact-box{ border-top:1px solid #cbd5e1; padding-top:35px; display:flex; justify-content:space-between; gap:40px; align-items:flex-end; transition:border-color 0.4s ease; }
+.contact p{ color:#64748b; margin-top:12px; transition:color 0.4s ease; }
+.contact-links{ display:flex; gap:10px; flex-wrap:wrap; }
+
+/* CONTROLES */
+.page-controls{ display:flex; justify-content:space-between; margin-top:55px; padding-top:20px; border-top:1px solid #cbd5e1; transition:border-color 0.4s ease; }
+.next,.prev{ border:0; background:transparent; color:#0f172a; font-weight:bold; cursor:pointer; font-size:13px; transition:opacity .2s, color 0.4s ease; }
+.next:hover,.prev:hover{opacity:.6}
+
+
+/* ===================================================
+   TEMA ESCURO (DARK MODE OVERRIDES)
+   =================================================== */
+body.dark-theme {
+    background:#080d1a;
+    color:#f1f5f9;
+}
+
+body.dark-theme .bg-animation { background:#080d1a; }
+body.dark-theme .bg-grid {
+    background-image:
+        linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+}
+
+body.dark-theme #mouse-glow {
+    background:radial-gradient(circle, rgba(0, 240, 255, 0.18) 0%, rgba(0, 85, 255, 0.08) 40%, transparent 70%);
+}
+
+body.dark-theme .nav {
+    background:rgba(8, 13, 26, 0.88);
+    border-bottom-color:rgba(0, 240, 255, 0.2);
+}
+
+body.dark-theme .menu a { color:#f1f5f9; }
+body.dark-theme .menu-btn {
+    background:#00f0ff!important;
+    color:#080d1a!important;
+    box-shadow:0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+body.dark-theme #hero-name,
+body.dark-theme h2,
+body.dark-theme h3 {
+    color:#ffffff;
+}
+
+body.dark-theme #hero-name {
+    text-shadow:0 0 30px rgba(0, 240, 255, 0.2);
+}
+
+body.dark-theme .home p,
+body.dark-theme .text p,
+body.dark-theme .section-top p,
+body.dark-theme .card p {
+    color:#cbd5e1;
+}
+
+body.dark-theme .small { color:#00f0ff; }
+
+body.dark-theme .button.dark {
+    background:#00f0ff;
+    color:#080d1a;
+    border-color:#00f0ff;
+    box-shadow:0 0 15px rgba(0, 240, 255, 0.25);
+}
+
+body.dark-theme .button.light {
+    color:#f1f5f9;
+    border-color:#00f0ff;
+}
+
+body.dark-theme .avatar {
+    background:#0e182e;
+    box-shadow:0 0 0 10px rgba(14,24,46,.55), 0 0 55px rgba(0,240,255,.2);
+    border-color:rgba(0,240,255,.3);
+}
+
+body.dark-theme .avatar small { color:#cbd5e1; }
+
+body.dark-theme .avatar-wrap::before,
+body.dark-theme .avatar-wrap::after {
+    border-color:rgba(0, 240, 255, 0.3);
+}
+
+body.dark-theme .orbit {
+    background:rgba(8,13,26,.92);
+    color:#f1f5f9;
+    border-color:#1b2a4a;
+}
+
+body.dark-theme .about,
+body.dark-theme .contact {
+    background:rgba(14, 24, 46, 0.6);
+}
+
+body.dark-theme .tag {
+    background:rgba(8,13,26,0.6);
+    color:#f1f5f9;
+    border-color:#1b2a4a;
+}
+
+body.dark-theme .card {
+    background:linear-gradient(145deg, rgba(14,24,46,0.95) 0%, rgba(8,13,26,0.95) 100%);
+    border-color:#1b2a4a;
+    box-shadow:0 12px 30px rgba(0,0,0,.3);
+}
+
+body.dark-theme .card:hover {
+    border-color:#00f0ff;
+    box-shadow:0 20px 40px rgba(0,0,0,.4), 0 0 25px rgba(0,240,255,.2);
+}
+
+body.dark-theme .number {
+    background:#080d1a;
+    color:#00f0ff;
+    border-color:#1b2a4a;
+}
+
+body.dark-theme .date { color:#94a3b8; }
+
+body.dark-theme .card a {
+    background:#00f0ff;
+    color:#080d1a!important;
+    box-shadow:0 0 12px rgba(0, 240, 255, 0.3);
+}
+
+body.dark-theme .wave-slate path {
+    fill:rgba(14, 24, 46, 0.6);
+}
+
+body.dark-theme .contact p { color:#94a3b8; }
+
+body.dark-theme .contact-box,
+body.dark-theme .page-controls {
+    border-top-color:#1b2a4a;
+}
+
+body.dark-theme .next,
+body.dark-theme .prev {
+    color:#f1f5f9;
+}
+
+/* RESPONSIVIDADE */
+@media(max-width:768px){
+    .nav{height:65px;padding:0 5%}
+    .menu{gap:12px}
+    .menu li:not(:last-child){display:none}
+    .menu-btn{padding:9px 14px}
+
+    .page{ min-height:auto; padding:85px 7% 50px; }
+    .home{min-height:100vh}
+    .home-grid{ grid-template-columns:1fr; gap:45px; }
+
+    #hero-name{ letter-spacing:-4px; }
+    .home p{font-size:16px}
+
+    .avatar-wrap{width:310px}
+    .avatar{width:205px}
+    .avatar span{font-size:65px}
+    
+    .orbit{font-size:8px;padding:7px 9px}
+    .orbit-a{top:4%;left:0}.orbit-b{top:18%;right:-2%}.orbit-c{bottom:14%;right:-2%}.orbit-d{bottom:1%;left:2%}
+
+    .about-grid{grid-template-columns:1fr;gap:35px}
+    .text p{font-size:16px}
+
+    .section-top{ display:block; }
+    .section-top p{margin-top:18px}
+
+    .cards-zigzag::before{ left:18px; }
+
+    .card{
+        width:calc(100% - 36px);
+        margin-left:36px!important;
+        align-self:stretch!important;
+    }
+
+    .card-left::before, .card-right::before{ left:-27px; right:auto; }
+    .card-left, .card-right{ border-left:4px solid #00f0ff; border-right:none; }
+
+    .contact-box{ display:block; }
+    .contact-links{margin-top:25px}
+    .page-controls{ margin-top:40px; }
+
+    #mouse-glow{ display:none; }
+    .wave-divider svg{ height:40px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg-animation" aria-hidden="true">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid"></div>
+</div>
+
+<div id="mouse-glow" aria-hidden="true"></div>
+
+<nav class="nav">
+    <div class="logo">KB</div>
+
+    <div class="menu-wrapper">
+        <ul class="menu">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#sobre">Sobre mim</a></li>
+            <li><a href="#entregas">Entregas</a></li>
+            <li><a href="#futuro">Futuro</a></li>
+            <li><a class="menu-btn" href="#contato">Contato</a></li>
+        </ul>
+
+        <!-- INTERRUPTOR DE TEMA -->
+        <div class="theme-switch-wrapper">
+            <span class="theme-icon">☀️</span>
+            <label class="theme-switch" for="theme-checkbox">
+                <input type="checkbox" id="theme-checkbox" aria-label="Mudar para tema escuro">
+                <span class="slider"></span>
+            </label>
+            <span class="theme-icon">🌙</span>
+        </div>
+    </div>
+</nav>
+
+<!-- PÁGINA 1 -->
+<section class="page home" id="inicio">
+    <div class="container home-grid">
+
+        <div>
+            <div class="small">Meu portfólio • 2026</div>
+
+            <h1 id="hero-name" title="Clique no nome para ver a mágica!">Kaiki<br>Martins<br>Barbosa Roque</h1>
+
+            <p>
+                Estudante de Informática para Internet, aprendendo tecnologia,
+                criando meus próprios projetos e construindo meu caminho.
+            </p>
+
+            <div class="buttons">
+                <a class="button dark" href="#sobre">Sobre mim →</a>
+                <a class="button light" href="#entregas">Ver entregas</a>
+            </div>
+        </div>
+
+        <div class="avatar-wrap">
+            <div class="orbit orbit-a"><span>TECNOLOGIA</span></div>
+            <div class="orbit orbit-b"><span>&lt;/&gt; WEB</span></div>
+            <div class="orbit orbit-c"><span>⚽ CRUZEIRO</span></div>
+            <div class="orbit orbit-d"><span>CODE • 2026</span></div>
+            
+            <div class="avatar" id="kb-avatar" title="Clique para ampliar">
+                <span>KB</span>
+                <small>15 • VARGINHA MG</small>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<div class="wave-divider wave-slate" aria-hidden="true">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,121.6,200,115.8,241.1,112.35,281.82,88.4,321.39,56.44Z"></path>
+    </svg>
+</div>
+
+<!-- PÁGINA 2 -->
+<section class="page about" id="sobre">
+    <div class="container">
+
+        <div class="about-grid">
+            <div>
+                <div class="small">01 / Sobre mim</div>
+                <h2>Quem<br>sou eu?</h2>
+
+                <div class="tags">
+                    <span class="tag">15 anos</span>
+                    <span class="tag">Varginha — MG</span>
+                    <span class="tag">Informática para Internet</span>
+                </div>
+            </div>
+
+            <div class="text">
+                <p>
+                    Meu nome é Kaiki Martins Barbosa Roque, tenho 15 anos e moro
+                    em Varginha, Minas Gerais. Atualmente faço o curso técnico de
+                    Informática para Internet, onde estou aprendendo a transformar
+                    ideias em projetos usando tecnologia.
+                </p>
+
+                <p>
+                    Três coisas que me definem são família, vontade e paz.
+                    Gosto de aprender, melhorar aos poucos e construir algo que
+                    tenha a minha identidade. No futuro, quero abrir um hotel e
+                    transformar esse objetivo em um projeto real.
+                </p>
+            </div>
+        </div>
+
+        <div class="page-controls">
+            <button class="prev" onclick="location.href='#inicio'">← Início</button>
+            <button class="next" onclick="location.href='#entregas'">Próximo: Entregas →</button>
+        </div>
+
+    </div>
+</section>
+
+<div class="wave-divider wave-slate" style="transform: rotate(180deg);" aria-hidden="true">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V120H0Z"></path>
+    </svg>
+</div>
+
+<!-- PÁGINA 3 -->
+<section class="page deliveries" id="entregas">
+    <div class="container">
+
+        <div class="section-top">
+            <div>
+                <div class="small">02 / Trabalhos</div>
+                <h2>Minhas<br>entregas</h2>
+            </div>
+
+            <p>
+                Aqui estão as atividades que produzi durante o módulo,
+                separadas para facilitar a navegação.
+            </p>
+        </div>
+
+        <div class="cards-zigzag">
+
+            <article class="card card-left">
+                <span class="card-icon">✦</span>
+                <span class="number">01 — ENTREGA</span>
+                <h3>Capa do Meu Álbum</h3>
+                <div class="date">Data: __/__/____</div>
+                <p>Aprendi a colocar minhas ideias em uma capa e deixar o trabalho com mais a minha cara.</p>
+                <a href="02-capa-do-album/" target="_blank">Abrir pasta →</a>
+            </article>
+
+            <article class="card card-right">
+                <span class="card-icon">&lt;/&gt;</span>
+                <span class="number">02 — ENTREGA</span>
+                <h3>Dashboard Quem Sou Eu</h3>
+                <div class="date">Data: __/__/____</div>
+                <p>Aprendi a organizar informações sobre mim e deixar tudo mais fácil de entender.</p>
+                <a href="03-dashboard/" target="_blank">Abrir pasta →</a>
+            </article>
+
+            <article class="card card-left">
+                <span class="card-icon">▦</span>
+                <span class="number">03 — ENTREGA</span>
+                <h3>Árvore das Profissões</h3>
+                <div class="date">Data: __/__/____</div>
+                <p>Aprendi a pensar melhor nas profissões que existem e no que eu posso fazer no futuro.</p>
+                <a href="04-arvore-profissoes/" target="_blank">Abrir pasta →</a>
+            </article>
+
+            <article class="card card-right">
+                <span class="card-icon">↗</span>
+                <span class="number">04 — ENTREGA</span>
+                <h3>Âncoras de Carreira</h3>
+                <div class="date">Data: __/__/____</div>
+                <p>Aprendi a pensar no que é importante para mim e no tipo de caminho que quero seguir.</p>
+                <a href="05-ancoras-manifesto/" target="_blank">Abrir pasta →</a>
+            </article>
+
+            <article class="card card-left">
+                <span class="card-icon">★</span>
+                <span class="number">05 — ENTREGA</span>
+                <h3>O Manifesto</h3>
+                <div class="date">Data: __/__/____</div>
+                <p>Aprendi a colocar minhas ideias e objetivos em palavras e pensar melhor sobre quem quero ser.</p>
+                <a href="05-ancoras-manifesto/" target="_blank">Abrir pasta →</a>
+            </article>
+
+        </div>
+
+        <div class="page-controls">
+            <button class="prev" onclick="location.href='#sobre'">← Sobre mim</button>
+            <button class="next" onclick="location.href='#futuro'">Próximo: Futuro →</button>
+        </div>
+
+    </div>
+</section>
+
+<div class="wave-divider wave-electric" aria-hidden="true">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V120H0Z"></path>
+    </svg>
+</div>
+
+<!-- PÁGINA 4 -->
+<section class="page future" id="futuro">
+    <div class="container">
+
+        <div class="small">03 / Meu objetivo</div>
+        <h2>Estou aprendendo.<br>E quero chegar longe.</h2>
+
+        <p>
+            Quero continuar aprendendo tecnologia e desenvolvendo minhas
+            habilidades para, no futuro, abrir meu próprio hotel.
+        </p>
+
+        <div class="buttons">
+            <a class="button light" href="#entregas">← Ver entregas</a>
+            <a class="button dark" href="#contato">Entrar em contato →</a>
+        </div>
+
+        <div class="page-controls">
+            <button class="prev" onclick="location.href='#entregas'">← Entregas</button>
+            <button class="next" onclick="location.href='#contato'">Próximo: Contato →</button>
+        </div>
+
+    </div>
+</section>
+
+<div class="wave-divider wave-electric" style="transform: rotate(180deg);" aria-hidden="true">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V120H0Z"></path>
+    </svg>
+</div>
+
+<!-- PÁGINA 5 -->
+<section class="page contact" id="contato">
+    <div class="container">
+
+        <div class="small">04 / Contato</div>
+        <h2>Quer falar<br>comigo?</h2>
+
+        <div class="contact-box">
+            <div>
+                <strong>Kaiki Martins Barbosa Roque</strong>
+                <p>Informática para Internet • Varginha, MG</p>
+            </div>
+
+            <div class="contact-links">
+                <a class="button dark" href="mailto:seuemail@exemplo.com">Meu e-mail</a>
+                <a class="button light" href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+        </div>
+
+        <div class="page-controls">
+            <button class="prev" onclick="location.href='#futuro'">← Meu futuro</button>
+            <button class="next" onclick="location.href='#inicio'">Voltar ao início ↑</button>
+        </div>
+
+    </div>
+</section>
+
+<div class="color-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+<style>
+.color-dots{position:fixed;right:28px;bottom:22px;display:flex;gap:7px;z-index:150}.color-dots span{width:9px;height:9px;border-radius:50%;display:block}.color-dots span:nth-child(1){background:#00f0ff}.color-dots span:nth-child(2){background:#38bdf8}.color-dots span:nth-child(3){background:#0066ff}@media(max-width:750px){.color-dots{right:18px;bottom:15px}}
+</style>
+
+<!-- SCRIPTS -->
+<script>
+    // 1. ALTERNÂNCIA PARA MODO ESCURO
+    const themeCheckbox = document.getElementById('theme-checkbox');
+    
+    themeCheckbox.addEventListener('change', () => {
+        if (themeCheckbox.checked) {
+            document.body.classList.add('dark-theme');
+        } else {
+            document.body.classList.remove('dark-theme');
+        }
+    });
+
+    // 2. LUZ SEGUIDORA DO MOUSE
+    const mouseGlow = document.getElementById('mouse-glow');
+    let mouseTimeout;
+
+    window.addEventListener('mousemove', (e) => {
+        mouseGlow.style.left = e.clientX + 'px';
+        mouseGlow.style.top = e.clientY + 'px';
+        mouseGlow.classList.add('active');
+
+        clearTimeout(mouseTimeout);
+        mouseTimeout = setTimeout(() => {
+            mouseGlow.classList.remove('active');
+        }, 800);
+    });
+
+    document.addEventListener('mouseleave', () => {
+        mouseGlow.classList.remove('active');
+    });
+
+    // 3. AMPLIAR AVATAR KB
+    const kbAvatar = document.getElementById('kb-avatar');
+    
+    kbAvatar.addEventListener('click', (e) => {
+        e.stopPropagation();
+        kbAvatar.classList.toggle('is-zoomed');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (kbAvatar.classList.contains('is-zoomed') && !kbAvatar.contains(e.target)) {
+            kbAvatar.classList.remove('is-zoomed');
+        }
+    });
+
+    // 4. INTERAÇÃO AO CLICAR NO NOME (ANIMAÇÃO + PARTICULAS/EMOJIS)
+    const heroName = document.getElementById('hero-name');
+    const icons = ['⚡', '💻', '🔥', '✨', '⚽', '🚀', '✦', '💙'];
+
+    heroName.addEventListener('click', (e) => {
+        // Efeito de pulso no texto
+        heroName.classList.remove('clicked');
+        void heroName.offsetWidth; // Força re-renderização para reiniciar animação CSS
+        heroName.classList.add('clicked');
+
+        // Criação de 14 partículas no ponto do clique
+        const particleCount = 14;
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('span');
+            particle.className = 'sparkle-particle';
+            particle.innerText = icons[Math.floor(Math.random() * icons.length)];
+            
+            // Posição inicial no ponto do ponteiro do mouse
+            particle.style.left = e.clientX + 'px';
+            particle.style.top = e.clientY + 'px';
+
+            // Ângulo, distância e rotação aleatórios
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 70 + Math.random() * 90;
+            const dx = Math.cos(angle) * distance + 'px';
+            const dy = Math.sin(angle) * distance + 'px';
+            const rot = (Math.random() - 0.5) * 360 + 'deg';
+
+            particle.style.setProperty('--dx', dx);
+            particle.style.setProperty('--dy', dy);
+            particle.style.setProperty('--rot', rot);
+
+            document.body.appendChild(particle);
+
+            // Remove a partícula após a animação
+            setTimeout(() => {
+                particle.remove();
+            }, 800);
+        }
+    });
+</script>
+
+</body>
+</html>
