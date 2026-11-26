@@ -524,6 +524,9 @@ body.dark-theme .prev {
     #mouse-glow{ display:none; }
     .wave-divider svg{ height:40px; }
 }
+
+.card.featured{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:center;padding:clamp(20px,4vw,40px);border:1px solid #b5c9ed;border-left:5px solid #eab308;box-shadow:0 18px 50px rgba(0,85,255,.12)}
+.card.featured::before{display:none}.featured .album-art{display:block;margin:0;padding:12px;background:#0b1730;border-radius:20px;box-shadow:none}.featured .album-art img{width:100%;height:auto;object-fit:contain;margin:0;border-radius:12px}.featured h3{font-size:clamp(28px,4vw,46px);letter-spacing:-1px}.featured .album-title{color:#805900;font-weight:bold;margin-bottom:12px}.dark-theme .featured .album-title{color:#fde047}.featured .album-art:hover{transform:none;filter:none}.featured .album-actions{display:flex;flex-wrap:wrap;gap:10px}.featured .album-actions a{margin-top:16px}.card a:focus-visible,.button:focus-visible,.menu a:focus-visible{outline:3px solid #eab308;outline-offset:4px}.page{scroll-margin-top:76px}.theme-switch input{display:block;position:absolute;opacity:0;width:100%;height:100%;z-index:2;cursor:pointer}.theme-switch input:focus-visible + .slider{outline:3px solid #eab308;outline-offset:3px}@media(max-width:768px){.card.featured{width:100%;margin-left:0!important;grid-template-columns:1fr}.cards-zigzag::before{display:none}.card:not(.featured)::before{display:none}.card:not(.featured){width:100%;margin-left:0!important}.menu li:not(:last-child){display:list-item}.menu li:nth-child(2),.menu li:nth-child(4),.menu li:last-child{display:none}.menu-wrapper{gap:8px}.avatar-wrap{max-width:100%}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 </head>
 
@@ -668,15 +671,10 @@ body.dark-theme .prev {
 
         <div class="cards-zigzag">
 
-            <article class="card card-left">
-               <img src="capa-album.png" alt="Capa do álbum Bom e Novo">
-                <span class="card-icon">✦</span>
-                <span class="number">01 — ENTREGA</span>
-                <h3>Capa do Meu Álbum</h3>
-                <div class="date">Data: __/__/____</div>
-                <p>Aprendi a colocar minhas ideias em uma capa e deixar o trabalho com mais a minha cara.</p>
-                <a href="02-capa-do-album/" target="_blank">Abrir pasta →</a>
-            </article>
+            <article class="card card-left featured">
+<a class="album-art" href="capa-album.png" target="_blank" rel="noopener"><img src="capa-album.png" alt="Capa do meu álbum" decoding="async"></a>
+<div><span class="number">01 — PROJETO EM DESTAQUE</span><h3>Capa do Meu Álbum</h3><p class="album-title">Deus guia sempre</p><p>Aprendi a colocar minhas ideias em uma capa e deixar o trabalho com mais a minha cara. Neste projeto, trabalhei com cores, composição e identidade visual.</p><div class="album-actions"><a href="capa-album.png" target="_blank" rel="noopener">Ver capa completa ↗</a><a href="https://github.com/Kaikimroque/portfolio/blob/main/capa-album.png" target="_blank" rel="noopener">Ver no GitHub ↗</a></div></div>
+</article>
 
             <article class="card card-right">
                 <span class="card-icon">&lt;/&gt;</span>
@@ -775,8 +773,8 @@ body.dark-theme .prev {
             </div>
 
             <div class="contact-links">
-                <a class="button dark" href="mailto:seuemail@exemplo.com">Meu e-mail</a>
-                <a class="button light" href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a>
+                
+                <a class="button light" href="https://github.com/Kaikimroque" target="_blank" rel="noopener">GitHub ↗</a>
             </div>
         </div>
 
@@ -798,7 +796,9 @@ body.dark-theme .prev {
     // 1. ALTERNÂNCIA PARA MODO ESCURO
     const themeCheckbox = document.getElementById('theme-checkbox');
     
+    try { themeCheckbox.checked = localStorage.getItem('portfolio-theme') === 'dark'; document.body.classList.toggle('dark-theme', themeCheckbox.checked); } catch(e) {}
     themeCheckbox.addEventListener('change', () => {
+        try { localStorage.setItem('portfolio-theme', themeCheckbox.checked ? 'dark' : 'light'); } catch(e) {}
         if (themeCheckbox.checked) {
             document.body.classList.add('dark-theme');
         } else {
