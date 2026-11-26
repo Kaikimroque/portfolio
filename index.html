@@ -527,6 +527,14 @@ body.dark-theme .prev {
 
 .card.featured{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:center;padding:clamp(20px,4vw,40px);border:1px solid #b5c9ed;border-left:5px solid #eab308;box-shadow:0 18px 50px rgba(0,85,255,.12)}
 .card.featured::before{display:none}.featured .album-art{display:block;margin:0;padding:12px;background:#0b1730;border-radius:20px;box-shadow:none}.featured .album-art img{width:100%;height:auto;object-fit:contain;margin:0;border-radius:12px}.featured h3{font-size:clamp(28px,4vw,46px);letter-spacing:-1px}.featured .album-title{color:#805900;font-weight:bold;margin-bottom:12px}.dark-theme .featured .album-title{color:#fde047}.featured .album-art:hover{transform:none;filter:none}.featured .album-actions{display:flex;flex-wrap:wrap;gap:10px}.featured .album-actions a{margin-top:16px}.card a:focus-visible,.button:focus-visible,.menu a:focus-visible{outline:3px solid #eab308;outline-offset:4px}.page{scroll-margin-top:76px}.theme-switch input{display:block;position:absolute;opacity:0;width:100%;height:100%;z-index:2;cursor:pointer}.theme-switch input:focus-visible + .slider{outline:3px solid #eab308;outline-offset:3px}@media(max-width:768px){.card.featured{width:100%;margin-left:0!important;grid-template-columns:1fr}.cards-zigzag::before{display:none}.card:not(.featured)::before{display:none}.card:not(.featured){width:100%;margin-left:0!important}.menu li:not(:last-child){display:list-item}.menu li:nth-child(2),.menu li:nth-child(4),.menu li:last-child{display:none}.menu-wrapper{gap:8px}.avatar-wrap{max-width:100%}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+:root{--accent:#1659e8;--surface:#fff;--muted:#475569;--line:#dbe5f3}body.dark-theme{--accent:#67d9ff;--surface:#111d32;--muted:#b9c8df;--line:#263b58}
+.nav{height:auto;min-height:76px;gap:20px;padding-block:12px}.logo{text-decoration:none;flex-shrink:0}.menu a{display:block;padding:10px 12px;border-radius:12px}.menu{gap:4px}.menu a[aria-current="page"]{background:var(--accent);color:var(--surface)!important}.menu .menu-btn{box-shadow:none}.js-nav .wave-divider{display:none}.js-nav .page[hidden]{display:none!important}.js-nav .page{min-height:calc(100svh - 54px);padding-top:120px;padding-bottom:60px;animation:pageIn .35s ease both}.js-nav .about,.js-nav .contact{background:transparent;backdrop-filter:none}@keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+#hero-name{font-size:clamp(42px,6.5vw,88px);line-height:1;letter-spacing:-.055em}.home p{line-height:1.65}.home .motto{font-size:15px;color:var(--accent);font-weight:bold;letter-spacing:.04em;margin-top:16px}.hero-meta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}.hero-meta div{padding:14px 18px;border:1px solid var(--line);border-radius:16px;background:var(--surface);min-width:100px}.hero-meta strong{display:block;font-size:24px;color:var(--accent)}.hero-meta span{font-size:12px;color:var(--muted)}.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:25px}.value-grid div{background:var(--surface);border:1px solid var(--line);padding:20px;border-radius:18px;color:var(--accent);font-weight:bold}.value-grid small{display:block;color:var(--muted);font-weight:normal;margin-top:8px;line-height:1.45}
+.cards-zigzag{gap:24px}.card{padding:28px}.card .number{letter-spacing:.06em}.card h3{letter-spacing:-.5px}.card .project-category{color:var(--muted);font-size:12px;margin:10px 0}.card.featured{position:relative;overflow:hidden}.card.featured:after{content:"";position:absolute;width:180px;height:180px;right:-100px;top:-100px;border:1px solid #eab308;border-radius:50%;pointer-events:none}.featured .album-art{background:#091426}.featured .album-art img{max-height:480px;object-fit:contain}.featured .album-actions a:last-child{background:transparent;color:var(--accent)!important;border:1px solid var(--accent);box-shadow:none}
+.future{background:linear-gradient(125deg,#08204a,#123d82);color:#fff!important}.future h2,.future .small,.future p,.future .next,.future .prev{color:#fff!important}.future .button.light{color:#fff!important;border-color:#fff!important}.future .button.dark{background:#e0f2fe!important;color:#102544!important;border-color:#e0f2fe!important}.future .page-controls{border-color:#ffffff40}.future .roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px}.roadmap div{border:1px solid #ffffff40;background:#ffffff10;padding:20px;border-radius:18px}.roadmap span{display:block;color:#7dd3fc;font-size:12px;margin-bottom:10px}.roadmap strong{font-size:18px}
+.site-footer{padding:20px 6%;border-top:1px solid var(--line);color:var(--muted);display:flex;justify-content:space-between;gap:12px;font-size:12px;flex-wrap:wrap}.site-footer a{color:var(--accent)}.color-dots{display:none}.page-controls button{padding:10px;border-radius:10px}.page-controls button:focus-visible{outline:2px solid var(--accent)}
+@media(max-width:768px){.nav{flex-wrap:wrap;gap:8px;padding:10px 4%}.menu-wrapper{display:contents}.menu{order:3;width:100%;justify-content:space-between;gap:2px;overflow-x:auto}.menu li:nth-child(n){display:list-item}.menu a{padding:8px 6px;font-size:12px;white-space:nowrap}.menu .menu-btn{padding:8px 6px}.js-nav .page{padding-top:142px}.hero-meta div{flex:1}.value-grid,.future .roadmap{grid-template-columns:1fr}.home-grid{gap:24px}.card.featured{padding:20px}.featured .album-art img{max-height:none}}
 </style>
 </head>
 
@@ -542,7 +550,7 @@ body.dark-theme .prev {
 <div id="mouse-glow" aria-hidden="true"></div>
 
 <nav class="nav">
-    <div class="logo">KB</div>
+    <a class="logo" href="#inicio" aria-label="Ir ao início">KB</a>
 
     <div class="menu-wrapper">
         <ul class="menu">
@@ -579,10 +587,9 @@ body.dark-theme .prev {
                 criando meus próprios projetos e construindo meu caminho.
             </p>
 
-            <div class="buttons">
-                <a class="button dark" href="#sobre">Sobre mim →</a>
-                <a class="button light" href="#entregas">Ver entregas</a>
-            </div>
+            <p class="motto">Família, vontade e paz.</p>
+            <div class="buttons"><a class="button dark" href="#entregas">Explorar projetos →</a><a class="button light" href="#sobre">Sobre mim</a></div>
+            <div class="hero-meta"><div><strong>05</strong><span>Atividades do módulo</span></div><div><strong>2026</strong><span>Meu portfólio</span></div></div>
         </div>
 
         <div class="avatar-wrap">
@@ -635,7 +642,7 @@ body.dark-theme .prev {
                     Gosto de aprender, melhorar aos poucos e construir algo que
                     tenha a minha identidade. No futuro, quero abrir um hotel e
                     transformar esse objetivo em um projeto real.
-                </p>
+                </p><div class="value-grid"><div>Família<small>Minha base.</small></div><div>Vontade<small>Continuar aprendendo.</small></div><div>Paz<small>Buscar equilíbrio.</small></div></div>
             </div>
         </div>
 
@@ -680,7 +687,7 @@ body.dark-theme .prev {
                 <span class="card-icon">&lt;/&gt;</span>
                 <span class="number">02 — ENTREGA</span>
                 <h3>Dashboard Quem Sou Eu</h3>
-                <div class="date">Data: __/__/____</div>
+                <div class="project-category">Atividade do módulo</div>
                 <p>Aprendi a organizar informações sobre mim e deixar tudo mais fácil de entender.</p>
                 <a href="03-dashboard/" target="_blank">Abrir pasta →</a>
             </article>
@@ -689,7 +696,7 @@ body.dark-theme .prev {
                 <span class="card-icon">▦</span>
                 <span class="number">03 — ENTREGA</span>
                 <h3>Árvore das Profissões</h3>
-                <div class="date">Data: __/__/____</div>
+                <div class="project-category">Atividade do módulo</div>
                 <p>Aprendi a pensar melhor nas profissões que existem e no que eu posso fazer no futuro.</p>
                 <a href="04-arvore-profissoes/" target="_blank">Abrir pasta →</a>
             </article>
@@ -698,7 +705,7 @@ body.dark-theme .prev {
                 <span class="card-icon">↗</span>
                 <span class="number">04 — ENTREGA</span>
                 <h3>Âncoras de Carreira</h3>
-                <div class="date">Data: __/__/____</div>
+                <div class="project-category">Atividade do módulo</div>
                 <p>Aprendi a pensar no que é importante para mim e no tipo de caminho que quero seguir.</p>
                 <a href="05-ancoras-manifesto/" target="_blank">Abrir pasta →</a>
             </article>
@@ -707,7 +714,7 @@ body.dark-theme .prev {
                 <span class="card-icon">★</span>
                 <span class="number">05 — ENTREGA</span>
                 <h3>O Manifesto</h3>
-                <div class="date">Data: __/__/____</div>
+                <div class="project-category">Atividade do módulo</div>
                 <p>Aprendi a colocar minhas ideias e objetivos em palavras e pensar melhor sobre quem quero ser.</p>
                 <a href="05-ancoras-manifesto/" target="_blank">Abrir pasta →</a>
             </article>
@@ -738,7 +745,7 @@ body.dark-theme .prev {
         <p>
             Quero continuar aprendendo tecnologia e desenvolvendo minhas
             habilidades para, no futuro, abrir meu próprio hotel.
-        </p>
+        </p><div class="roadmap"><div><span>01 / AGORA</span><strong>Aprender tecnologia</strong></div><div><span>02 / PRÓXIMO PASSO</span><strong>Desenvolver habilidades</strong></div><div><span>03 / FUTURO</span><strong>Abrir meu hotel</strong></div></div>
 
         <div class="buttons">
             <a class="button light" href="#entregas">← Ver entregas</a>
@@ -786,7 +793,7 @@ body.dark-theme .prev {
     </div>
 </section>
 
-<div class="color-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+<footer class="site-footer"><span>KB © 2026 · Portfólio escolar</span><a href="https://github.com/Kaikimroque/portfolio">Código no GitHub ↗</a></footer><div class="color-dots" aria-hidden="true"><span></span><span></span><span></span></div>
 <style>
 .color-dots{position:fixed;right:28px;bottom:22px;display:flex;gap:7px;z-index:150}.color-dots span{width:9px;height:9px;border-radius:50%;display:block}.color-dots span:nth-child(1){background:#00f0ff}.color-dots span:nth-child(2){background:#38bdf8}.color-dots span:nth-child(3){background:#0066ff}@media(max-width:750px){.color-dots{right:18px;bottom:15px}}
 </style>
@@ -879,6 +886,20 @@ body.dark-theme .prev {
             }, 800);
         }
     });
+
+    // Navegação por páginas, com suporte ao histórico do navegador.
+    const pages = [...document.querySelectorAll('section.page')];
+    const navLinks = [...document.querySelectorAll('.menu a')];
+    function showPage(){
+        const id = location.hash.slice(1) || 'inicio';
+        const active = pages.find(p => p.id === id) || pages[0];
+        document.body.classList.add('js-nav');
+        pages.forEach(p => { p.hidden = p !== active; });
+        navLinks.forEach(a => { if(a.hash === '#'+active.id) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+        window.scrollTo({top:0,behavior:'instant'});
+    }
+    window.addEventListener('hashchange',showPage);
+    showPage();
 </script>
 
 </body>
